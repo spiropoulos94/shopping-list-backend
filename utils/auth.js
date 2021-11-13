@@ -66,7 +66,7 @@ export const signin = async (req, res) => {
     const token = newToken(user);
     return res.status(201).send({ token });
   } catch (e) {
-    console.error(e);
+    console.error(e, "Logged inside sign in controller");
     res.status(500).end();
   }
 };

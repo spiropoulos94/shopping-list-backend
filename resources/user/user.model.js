@@ -46,9 +46,13 @@ userSchema.methods.checkPassword = function (password) {
   //   });
   // });
 
-  // Instead of promises we can use async await
+  // Instead of promises we can use
 
-  return bcrypt.compare(password, passwordHash);
+  try {
+    return bcrypt.compareSync(password, passwordHash);
+  } catch (err) {
+    throw err;
+  }
 };
 
 export const User = mongoose.model("user", userSchema);
