@@ -4,7 +4,7 @@ import morgan from "morgan";
 import config from "./config/index.js";
 import cors from "cors";
 // import { signup, signin, protect } from "./utils/auth";
-// import { connect } from "./utils/db";
+import { connect } from "./utils/db.js";
 // import userRouter from "./resources/user/user.router";
 // import itemRouter from "./resources/item/item.router";
 // import listRouter from "./resources/list/list.router";
@@ -34,7 +34,7 @@ app.use(morgan("dev"));
 
 export const start = async () => {
   try {
-    // await connect();
+    await connect();
     app.listen(config.PORT, () => {
       console.log(`REST API on http://localhost:${config.PORT}/api`);
     });
