@@ -44,7 +44,7 @@ export const signin = async (req, res) => {
   const invalidUser = { message: "This user does not exist" };
 
   try {
-    // 2. Check if user exists
+    // 2. Check if user exists (search by email)
     const user = await User.findOne({ email: req.body.email })
       .select("email password")
       .exec();
