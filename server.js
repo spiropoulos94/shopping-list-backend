@@ -13,7 +13,7 @@ export const app = express();
 
 app.disable("x-powered-by");
 
-app.get((req, res) => {
+app.get("/api", (req, res) => {
   res.send({ data: "Hello World" });
 });
 
