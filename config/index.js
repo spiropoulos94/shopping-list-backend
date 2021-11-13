@@ -9,6 +9,7 @@ const config = {
     JWT_SECRET: process.env.JWT_SECRET || "secret",
     JWT_EXP: process.env.JWT_EXP || "7d",
   },
+  DB_URL: process.env.DB_URL,
 };
 
 export default config;
