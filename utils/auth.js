@@ -34,6 +34,8 @@ export const signup = async (req, res) => {
 };
 
 export const signin = async (req, res) => {
+  // 1. Check if email and password are provided
+
   if (!req.body.email || !req.body.password) {
     return res.status(400).send({ message: "need email and password" });
   }
@@ -42,6 +44,7 @@ export const signin = async (req, res) => {
   const invalidUser = { message: "This user does not exist" };
 
   try {
+    // 2. Check if user exists
     const user = await User.findOne({ email: req.body.email })
       .select("email password")
       .exec();
@@ -50,12 +53,14 @@ export const signin = async (req, res) => {
       return res.status(401).send(invalidUser);
     }
 
+    // 3. Check if user exists and password is correct
     const match = await user.checkPassword(req.body.password);
 
     if (!match) {
       return res.status(401).send(invalidAttempt);
     }
 
+    // 4. Create token and return it
     const token = newToken(user);
     return res.status(201).send({ token });
   } catch (e) {
