@@ -56,6 +56,8 @@ export const signin = async (req, res) => {
     // 3. Check if user exists and password is correct
     const match = await user.checkPassword(req.body.password);
 
+    console.log("match mesa sto auth", match);
+
     if (!match) {
       return res.status(401).send(invalidAttempt);
     }

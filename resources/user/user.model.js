@@ -32,18 +32,23 @@ userSchema.pre("save", function (next) {
   });
 });
 
-// the password parameter is the password that the user entered
+// the password parameter is the password that the user entered(req.body.password)
 userSchema.methods.checkPassword = function (password) {
   const passwordHash = this.password;
-  return new Promise((resolve, reject) => {
-    bcrypt.compare(password, passwordHash, (err, same) => {
-      if (err) {
-        return reject(err);
-      }
 
-      resolve(same);
-    });
-  });
+  // return new Promise((resolve, reject) => {
+  //   bcrypt.compare(password, passwordHash, (err, same) => {
+  //     if (err) {
+  //       return reject(err);
+  //     }
+
+  //     resolve(same);
+  //   });
+  // });
+
+  // Instead of promises we can use async await
+
+  return bcrypt.compare(password, passwordHash);
 };
 
 export const User = mongoose.model("user", userSchema);
