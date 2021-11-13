@@ -1,5 +1,5 @@
 import express from "express";
-// import { json, urlencoded } from "body-parser";
+import body_parser from "body-parser";
 // import morgan from "morgan";
 import config from "./config/index.js";
 // import cors from "cors";
@@ -11,6 +11,8 @@ import config from "./config/index.js";
 
 export const app = express();
 
+let { json, urlencoded } = body_parser;
+
 app.disable("x-powered-by");
 
 app.get("/api", (req, res) => {
@@ -18,8 +20,8 @@ app.get("/api", (req, res) => {
 });
 
 // app.use(cors());
-// app.use(json());
-// app.use(urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 // app.use(morgan("dev"));
 
 // app.post("/signup", signup);
