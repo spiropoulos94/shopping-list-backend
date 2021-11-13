@@ -39,7 +39,7 @@ export const signin = async (req, res) => {
   }
 
   const invalidAttempt = { message: "Invalid email and password combination" };
-  const invalidUser = { message: "This user doesnt exist" };
+  const invalidUser = { message: "This user does not exist" };
 
   try {
     const user = await User.findOne({ email: req.body.email })

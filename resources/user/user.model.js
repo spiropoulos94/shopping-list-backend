@@ -32,6 +32,7 @@ userSchema.pre("save", function (next) {
   });
 });
 
+// the password parameter is the password that the user entered
 userSchema.methods.checkPassword = function (password) {
   const passwordHash = this.password;
   return new Promise((resolve, reject) => {
