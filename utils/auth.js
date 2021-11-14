@@ -84,6 +84,7 @@ export const protect = async (req, res, next) => {
   try {
     payload = await verifyToken(token);
   } catch (e) {
+    console.log(e);
     return res.status(401).end();
   }
 
