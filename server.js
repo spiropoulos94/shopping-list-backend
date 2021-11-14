@@ -14,9 +14,9 @@ let { json, urlencoded } = body_parser;
 
 app.disable("x-powered-by");
 
-app.get("/api", (req, res) => {
-  res.send({ data: "Hello World" });
-});
+// app.get("/api", (req, res) => {
+//   res.send({ data: "Hello World" });
+// });
 
 app.use(cors());
 app.use(json());
