@@ -97,6 +97,7 @@ export const protect = async (req, res, next) => {
     return res.status(401).end();
   }
 
+  // Add user to request
   req.user = user;
   next();
 };
