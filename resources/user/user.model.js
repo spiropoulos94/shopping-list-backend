@@ -36,23 +36,23 @@ userSchema.pre("save", function (next) {
 userSchema.methods.checkPassword = function (password) {
   const passwordHash = this.password;
 
-  // return new Promise((resolve, reject) => {
-  //   bcrypt.compare(password, passwordHash, (err, same) => {
-  //     if (err) {
-  //       return reject(err);
-  //     }
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(password, passwordHash, (err, same) => {
+      if (err) {
+        return reject(err);
+      }
 
-  //     resolve(same);
-  //   });
-  // });
+      resolve(same);
+    });
+  });
 
   // Instead of promises we can use
 
-  try {
-    return bcrypt.compareSync(password, passwordHash);
-  } catch (err) {
-    throw err;
-  }
+  // try {
+  //   return bcrypt.compare(password, passwordHash);
+  // } catch (err) {
+  //   throw err;
+  // }
 };
 
 export const User = mongoose.model("user", userSchema);
