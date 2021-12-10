@@ -13,7 +13,9 @@ export const newToken = (user) => {
 export const verifyToken = (token) =>
   new Promise((resolve, reject) => {
     jwt.verify(token, config.SECRETS.JWT_SECRET, (err, payload) => {
-      if (err) return reject(err);
+      if (err) {
+        return reject(err);
+      }
       resolve(payload);
     });
   });
@@ -22,6 +24,19 @@ export const verifyToken = (token) =>
 export const signup = async (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).send({ message: "need email and password" });
+  }
+
+  // check if user by this mail already exists
+  const userAlreadyExists = {
+    message: "User already exists",
+  };
+
+  const user = await User.findOne({ email: req.body.email })
+    .select("email password")
+    .exec();
+
+  if (user) {
+    return res.status(401).send(userAlreadyExists);
   }
 
   try {
