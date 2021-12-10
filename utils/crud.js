@@ -73,10 +73,12 @@ export const removeOne = (model) => async (req, res) => {
     });
 
     if (!removed) {
-      return res.status(400).end();
+      return res.status(400).send({
+        message: "Error removing record",
+      });
     }
 
-    return res.status(200).json({ data: removed });
+    return res.status(200).json({ data: removed, message: "Record removed" });
   } catch (e) {
     console.error(e);
     res.status(400).end();
