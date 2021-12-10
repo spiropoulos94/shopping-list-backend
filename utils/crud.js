@@ -34,7 +34,9 @@ export const createOne = (model) => async (req, res) => {
     res.status(201).json({ data: doc });
   } catch (e) {
     console.error(e);
-    res.status(400).end();
+    res.status(400).send({
+      message: "Error creating new record",
+    });
   }
 };
 
