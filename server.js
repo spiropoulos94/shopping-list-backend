@@ -3,6 +3,7 @@ import body_parser from "body-parser";
 import morgan from "morgan";
 import config from "./config/index.js";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { signup, signin, protect } from "./utils/auth.js";
 import { connect } from "./utils/db.js";
 import userRouter from "./resources/user/user.router.js";
@@ -23,6 +24,7 @@ app.use(cors({ credentials: true, origin: "http://localhost:8080" }));
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan("dev"));
+app.use(cookieParser());
 
 app.post("/signup", signup);
 app.post("/signin", signin);

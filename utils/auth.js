@@ -81,6 +81,15 @@ export const signin = async (req, res) => {
     // 4. Create token and return it
     const token = newToken(user);
     return res.status(201).send({ token });
+
+    // the following code returns the jwt as a cookie which is store on the client side
+
+    // return res
+    //   .cookie("access_token", token, {
+    //     httpOnly: true,
+    //   })
+    //   .status(200)
+    //   .json({ message: "Logged in successfully 😊 👌" });
   } catch (e) {
     console.error(e, "Logged inside sign in controller");
     res.status(500).end();
