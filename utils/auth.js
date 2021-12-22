@@ -22,7 +22,7 @@ export const verifyToken = (token) =>
 
 // Sign up
 export const signup = async (req, res) => {
-  if (!req.body.email || !req.body.password) {
+  if (!req.body.email || !req.body.password || !req.body.name) {
     return res.status(400).send({ message: "need email and password" });
   }
 
