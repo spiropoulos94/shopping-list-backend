@@ -10,7 +10,7 @@ router.route("/").get(controllers.getMany).post(controllers.createOne);
 router
   .route("/:id")
   .get(controllers.getOne)
-  .put(controllers.updateOne)
+  .put(controllers.updateOne) // check
   .delete(controllers.removeOne);
 
 export default router;

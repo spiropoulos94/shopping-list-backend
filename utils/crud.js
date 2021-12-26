@@ -17,6 +17,7 @@ export const getOne = (model) => async (req, res) => {
 };
 
 export const getMany = (model) => async (req, res) => {
+  console.log("getMany", req.user._id);
   try {
     const docs = await model.find({ createdBy: req.user._id }).lean().exec();
 

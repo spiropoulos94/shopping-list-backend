@@ -6,13 +6,14 @@ const itemSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      createdBy: {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "user",
-        required: true,
-      },
+    },
+    createdBy: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "user",
+      required: true,
     },
     notes: String,
+    things: [String], //check
   },
   { timestamps: true }
 );
