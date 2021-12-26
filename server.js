@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import { signup, signin, protect } from "./utils/auth.js";
 import { connect } from "./utils/db.js";
 import userRouter from "./resources/user/user.router.js";
-import itemRouter from "./resources/item/item.router.js";
+import listRouter from "./resources/list/list.router.js";
 
 export const app = express();
 
@@ -31,7 +31,7 @@ app.post("/signin", signin);
 
 app.use("/api", protect);
 app.use("/api/user", userRouter);
-app.use("/api/item", itemRouter);
+app.use("/api/list", listRouter);
 
 export const start = async () => {
   try {

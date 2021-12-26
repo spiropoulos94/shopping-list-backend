@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const itemSchema = new mongoose.Schema(
+const listSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -13,9 +13,9 @@ const itemSchema = new mongoose.Schema(
       required: true,
     },
     notes: String,
-    things: [String], //check
+    items: [String], //check
   },
   { timestamps: true }
 );
 
-export const Item = mongoose.model("item", itemSchema);
+export const List = mongoose.model("list", listSchema);
