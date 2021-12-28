@@ -1,4 +1,4 @@
-export const getOne = (model) => async (req, res, next) => {
+export const getOne = (model) => async (req, res) => {
   try {
     const doc = await model
       .findOne({ createdBy: req.user._id, _id: req.params.id })
@@ -11,32 +11,29 @@ export const getOne = (model) => async (req, res, next) => {
 
     res.status(200).json({ data: doc });
   } catch (e) {
-    next(e);
     console.error(e);
     res.status(400).end();
   }
 };
 
-export const getMany = (model) => async (req, res, next) => {
+export const getMany = (model) => async (req, res) => {
   console.log("getMany", req.user._id);
   try {
     const docs = await model.find({ createdBy: req.user._id }).lean().exec();
 
     res.status(200).json({ data: docs });
   } catch (e) {
-    next(e);
     console.error(e);
     res.status(400).end();
   }
 };
 
-export const createOne = (model) => async (req, res, next) => {
+export const createOne = (model) => async (req, res) => {
   const createdBy = req.user._id;
   try {
     const doc = await model.create({ ...req.body, createdBy });
     res.status(201).json({ data: doc });
   } catch (e) {
-    next(e);
     console.error(e);
     res.status(400).send({
       message: "Error creating new record",
@@ -44,7 +41,7 @@ export const createOne = (model) => async (req, res, next) => {
   }
 };
 
-export const updateOne = (model) => async (req, res, next) => {
+export const updateOne = (model) => async (req, res) => {
   try {
     const updatedDoc = await model
       .findOneAndUpdate(
@@ -64,13 +61,12 @@ export const updateOne = (model) => async (req, res, next) => {
 
     res.status(200).json({ data: updatedDoc });
   } catch (e) {
-    next(e);
     console.error(e);
     res.status(400).end();
   }
 };
 
-export const removeOne = (model) => async (req, res, next) => {
+export const removeOne = (model) => async (req, res) => {
   try {
     const removed = await model.findOneAndRemove({
       createdBy: req.user._id,
@@ -85,7 +81,6 @@ export const removeOne = (model) => async (req, res, next) => {
 
     return res.status(200).json({ data: removed, message: "Record removed" });
   } catch (e) {
-    next(e);
     console.error(e);
     res.status(400).end();
   }
