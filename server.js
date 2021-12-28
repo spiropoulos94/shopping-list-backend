@@ -20,8 +20,10 @@ app.disable("x-powered-by");
 // });
 
 // app.use(cors());
+app.use(express.json());
+// app.use(express.urlencoded());
 app.use(json());
-app.use(urlencoded({ extended: true }));
+// app.use(urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: "http://localhost:8080" }));
 app.use(morgan("dev"));
 app.use(cookieParser());
