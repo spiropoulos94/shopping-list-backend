@@ -20,7 +20,7 @@ app.disable("x-powered-by");
 // });
 
 // app.use(cors());
-app.use(cors({ credentials: true, origin: "http://localhost:8080" }));
+app.use(cors({ credentials: true, origin: "https://kots-lists.netlify.app/" }));
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan("dev"));
