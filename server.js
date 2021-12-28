@@ -40,6 +40,7 @@ export const start = async () => {
       console.log(`REST API on http://localhost:${config.PORT}/api`);
     });
   } catch (e) {
+    next(e);
     console.error(e);
   }
 };

@@ -21,7 +21,7 @@ export const verifyToken = (token) =>
   });
 
 // Sign up
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
   if (!req.body.email || !req.body.password || !req.body.name) {
     return res.status(400).send({ message: "need email and password" });
   }
@@ -44,12 +44,13 @@ export const signup = async (req, res) => {
     const token = newToken(user);
     return res.status(201).send({ token });
   } catch (e) {
-    console.log(e);
+    // console.log(e);
+    next(e);
     return res.status(500).end();
   }
 };
 
-export const signin = async (req, res) => {
+export const signin = async (req, res, next) => {
   // 1. Check if email and password are provided
 
   if (!req.body.email || !req.body.password) {
@@ -91,6 +92,7 @@ export const signin = async (req, res) => {
     //   .status(200)
     //   .json({ message: "Logged in successfully 😊 👌" });
   } catch (e) {
+    next(e);
     console.error(e, "Logged inside sign in controller");
     res.status(500).end();
   }
@@ -108,6 +110,7 @@ export const protect = async (req, res, next) => {
   try {
     payload = await verifyToken(token);
   } catch (e) {
+    next(e);
     console.log(e);
     return res.status(401).end();
   }
